@@ -31,3 +31,7 @@ role/tests/nxapi.
   to assertsion too, but the idea is to make it as easy as possilbe when 
   troubleshooting broken tests.)
 
+
+Copyright 2016 RedHat | Ansible
+
+[License](https://github.com/ansible-testing/test-nxos/blob/master/LICENSE)
