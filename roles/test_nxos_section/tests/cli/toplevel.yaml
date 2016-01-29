@@ -1,0 +1,28 @@
+---
+- name: setup test
+  nxos_section:
+    commands: ['hostname {{ inventory_hostname }}']
+    provider: "{{ cli }}"
+    force: yes
+
+- name: configure top level command
+  nxos_section:
+    commands: ['hostname foo']
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'hostname foo' in result.commands"
+
+- name: configure top level command idempotent check
+  nxos_section:
+    commands: ['hostname foo']
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+

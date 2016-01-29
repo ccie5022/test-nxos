@@ -1,0 +1,7 @@
+---
+- hosts: nxos
+  gather_facts: no
+  connection: local
+
+  roles:
+    - { role: test_nxos_section, delegate_to: virl }

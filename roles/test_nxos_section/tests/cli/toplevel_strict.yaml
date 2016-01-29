@@ -1,0 +1,25 @@
+---
+- name: setup test
+  nxos_section:
+    commands:
+      - snmp-server location test
+      - snmp-server contact ansible
+    provider: "{{ cli }}"
+    force: yes
+
+- name: configure top level command using strict
+  nxos_section:
+    commands:
+      - snmp-server location test
+      - snmp-server contact ansible
+    provider: "{{ cli }}"
+    strategy: strict
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'snmp-server location test' in result.commands"
+      - "'snmp-server contact ansible' in result.commands"
+
+
