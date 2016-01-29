@@ -28,8 +28,8 @@ role/tests/nxapi.
   troubleshoot.
 
 - Include a name for each task that is not an assertion. (It's OK to add names
-  to assertsion too, but the idea is to make it as easy as possilbe when 
-  troubleshooting broken tests.)
+  to assertsion too. But to make it easy to identify the broken task within a failed
+  test, at least provide a helpful name for each task.)
 
 ## License
 
