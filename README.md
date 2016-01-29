@@ -24,10 +24,10 @@ role/tests/nxapi.
 
   >setup —> test —> assert —> test again (idempotent) —> assert —> done
 
-  This should keep test playbooks from becoming monolithic and difficult to
+  This keeps test playbooks from becoming monolithic and difficult to
   troubleshoot.
 
-- Include a name for each task that is not as assertion. It's OK to add names
-  to assertsion too, but the idea is to make it as simple as possilbe when 
-  troubleshooting broken tests. 
+- Include a name for each task that is not an assertion. (It's OK to add names
+  to assertsion too, but the idea is to make it as easy as possilbe when 
+  troubleshooting broken tests.)
 
