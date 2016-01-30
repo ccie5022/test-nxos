@@ -1,0 +1,45 @@
+---
+- name: Setup - put NXAPI in stopped state
+  nxos_nxapi:
+      state: stopped
+      provider: "{{ cli }}"
+  register: result
+  delegate_to: "{{ delegate_to }}"  
+
+- name: Enable NXAPI
+  nxos_nxapi:
+      state: started
+      provider: "{{ cli }}"
+  register: result
+  delegate_to: "{{ delegate_to }}"  
+
+- debug: var=result
+  when: debug
+
+- name: Check NXAPI state
+  nxos_command:
+      commands:
+          - show feature | grep nxapi
+      provider: "{{ cli }}"
+  register: result
+  delegate_to: "{{ delegate_to }}"  
+
+- debug: var=result
+  when: debug
+
+- name: Assert NXAPI is enabled
+  assert:
+      that: result.result[0] | search('enabled')
+
+- name: Enable NXAPI again
+  nxos_nxapi:
+      provider: "{{ cli }}"
+  register: result
+  delegate_to: "{{ delegate_to }}"  
+
+- debug: var=result
+  when: debug
+
+- name: Assert idempotence
+  assert:
+        that: result.commands | length == 0

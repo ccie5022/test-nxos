@@ -5,3 +5,4 @@
 
   roles:
     - { role: test_nxos_section, delegate_to: virl }
+    - { role: test_nxos_nxapi, delegate_to: virl }
