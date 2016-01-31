@@ -1,0 +1,20 @@
+---
+- debug: msg="START CLI/CONTAINS.YAML"
+
+- name: test contains operator
+  nxos_command:
+    commands:
+      - show version
+      - show interface mgmt0 | json
+    waitfor:
+      - "result[0] contains NX-OS"
+      - "result[1].TABLE_interface.ROW_interface.interface contains mgmt"
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.result is defined"
+
+- debug: msg="END CLI/CONTAINS.YAML"
