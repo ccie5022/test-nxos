@@ -1,0 +1,31 @@
+---
+- name: setup test
+  nxos_section:
+    commands: ['no ip access-list test']
+    provider: "{{ cli }}"
+    force: yes
+
+- name: configure sub level command
+  nxos_section:
+    commands: ['10 permit ip any any log']
+    parents: ['ip access-list test']
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'ip access-list test' in result.commands"
+      - "'10 permit ip any any log' in result.commands"
+
+- name: configure sub level command idempotent check
+  nxos_section:
+    commands: ['10 permit ip any any log']
+    parents: ['ip access-list test']
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+
