@@ -1,2 +1,2 @@
 ---
-- include: cli.yaml
+- { include: cli.yaml, tags: ['cli'] }

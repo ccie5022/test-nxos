@@ -1,0 +1,43 @@
+---
+- debug: msg="START CLI/DEFAULTS.YAML"
+
+- name: setup
+  nxos_section:
+    commands:
+      - no description
+      - shutdown
+    parents:
+      - interface Ethernet2/5
+    force: yes
+    provider: "{{ cli }}"
+
+- name: configure device with defaults included
+  nxos_config:
+    src: defaults/config.j2
+    include_defaults: yes
+    provider: "{{ cli }}"
+  register: result
+
+- debug: var=result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "result.commands is defined"
+
+- name: check device with defaults included
+  nxos_config:
+    src: defaults/config.j2
+    include_defaults: yes
+    provider: "{{ cli }}"
+  register: result
+
+- debug: var=result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.commands is defined"
+
+- debug: msg="END CLI/DEFAULTS.YAML"
+

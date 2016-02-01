@@ -1,0 +1,37 @@
+---
+- debug: msg="START CLI/BASIC.YAML"
+
+- name: setup
+  nxos_section:
+    commands:
+      - no description
+      - no shutdown
+    parents:
+      - interface Ethernet2/5
+    force: yes
+    provider: "{{ cli }}"
+
+- name: configure device with config
+  nxos_config:
+    src: basic/config.j2
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "result.commands is defined"
+
+- name: check device with config
+  nxos_config:
+    src: basic/config.j2
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.commands is defined"
+
+- debug: msg="END CLI/BASIC.YAML"
+

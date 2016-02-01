@@ -4,5 +4,6 @@
   connection: local
 
   roles:
-    - { role: test_nxos_command, delegate_to: virl }
-    - { role: test_nxos_section, delegate_to: virl }
+    - { role: test_nxos_command, delegate_to: virl, tags: ['nxos_command'] }
+    - { role: test_nxos_section, delegate_to: virl, tags: ['nxos_section']  }
+    - { role: test_nxos_config, delegate_to: virl, tags: ['nxos_config'] }
