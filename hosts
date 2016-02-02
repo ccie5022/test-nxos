@@ -8,6 +8,7 @@ virl ansible_host=virl
 ansible_user=virl
 
 [nxos]
-nxos02
+#nxos02 delegate_to=virl
+nxos01 delegate_to=virl
 
 
