@@ -1,10 +1,10 @@
 ---
+- debug: msg="START CLI/CONFIGURE.YAML"
 
 - name: Setup - put NXAPI in stopped state
   nxos_nxapi:
       state: stopped
       provider: "{{ cli }}"
-  #delegate_to: "{{ delegate_to }}"  
 
 - name: Configure NXAPI
   nxos_nxapi:
@@ -13,8 +13,7 @@
       https_port: 9443
       provider: "{{ cli }}"
   register: result
-  #delegate_to: "{{ delegate_to }}"  
-  
+
 - debug: var=result
   when: debug 
 
@@ -23,8 +22,7 @@
           - show nxapi | json 
       provider: "{{ cli }}"
   register: result
-  #delegate_to: "{{ delegate_to }}"  
- 
+
 - debug: var=result
   when: debug 
 
@@ -42,7 +40,6 @@
       https_port: 9443
       provider: "{{ cli }}"
   register: result
-  #delegate_to: "{{ delegate_to }}"  
 
 - debug: var=result
   when: debug
@@ -50,3 +47,5 @@
 - name: Assert configuration is idempotent
   assert:
       that: result.commands | length == 0
+
+- debug: msg="END CLI/CONFIGURE.YAML"

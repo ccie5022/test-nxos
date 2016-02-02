@@ -1,4 +1,7 @@
 ---
+
+- debug: msg="START CLI/ENABLE.YAML"
+
 - name: Setup - put NXAPI in stopped state
   nxos_nxapi:
       state: stopped
@@ -43,3 +46,7 @@
 - name: Assert idempotence
   assert:
         that: result.commands | length == 0
+
+
+- debug: msg="END CLI/ENABLE.YAML"
+

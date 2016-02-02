@@ -1,4 +1,7 @@
-- name: Return NXAPI to started state with default config 
+
+- debug: msg="START CLI/RETURN.YAML"
+
+- name: Return NXAPI to started state with default config
   nxos_nxapi:
      provider: "{{ cli }}" 
   register: result   
@@ -37,3 +40,7 @@
 - name: Assert idempotence
   assert:
       that: result.commands | length == 0
+
+
+- debug: msg="END CLI/RETURN.YAML"
+
