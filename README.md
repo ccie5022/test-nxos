@@ -6,10 +6,17 @@ Playbooks for testing Ansible modules with Cisco NXOS devices
 $ ansible-playbook all.yaml
 ```
 
-To filter a singular test cases, pass the testcase argument on the command line
+To filter a set of test cases set limit_to to the name of the group (i.e. command, section, nxapi, etc.): 
 
 ```
-$ ansible-playbook all.yaml -e "testcase=sublevel"
+$ ansible-playbook all.yaml -e"limit_to=nxapi"
+```
+
+To filter a singular test case set the tags options to nxapi or cli, set limit_to to the test group,
+and test_cases to the name of the test:  
+
+```
+$ ansible-playbook all.yaml --tags="cli" -e"limit_to=nxapi test_case=return"
 ```
 
 ## Contributing Test Cases 
