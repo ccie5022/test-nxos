@@ -2,7 +2,7 @@
 ansible_python_interpreter=python
 
 [bastion]
-virl ansible_host=virl
+virl ansible_host=172.26.1.17
 
 [bastion:vars]
 ansible_user=virl
