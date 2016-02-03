@@ -2,8 +2,16 @@
 - hosts: nxos
   gather_facts: no
   connection: local
-
+  vars:
+    testcase: "{{ test_case | default('') }}"
+    limitto: "{{ limit_to | default('') }}"
+    test_cases:
+        - files: []
   roles:
-    - { role: test_nxos_command, delegate_to: virl, tags: ['nxos_command'] }
-    - { role: test_nxos_template, delegate_to: virl, tags: ['nxos_template']  }
-    - { role: test_nxos_config, delegate_to: virl, tags: ['nxos_config'] }
+    # use -e"limit_to=foo" to run a specific set of tests only
+    # use o-tags="cli or nxapi" -e"limit_to=foo testcase=bar" to run a specific test case
+
+    - { role: test_nxos_command, delegate_to: virl, when: "limitto == '' or limitto == 'command'" }
+    - { role: test_nxos_config, delegate_to: virl, when: "limitto == '' or limitto == 'config'" }
+    - { role: test_nxos_template, delegate_to: virl, when: "limitto == '' or limitto == 'config'" }
+    - { role: test_nxos_nxapi, delegate_to: virl, when: "limitto == '' or limitto == 'nxapi'" }

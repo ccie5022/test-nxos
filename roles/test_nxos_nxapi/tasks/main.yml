@@ -1,0 +1,2 @@
+---
+- { include: cli.yml, tags: ['cli'] }
