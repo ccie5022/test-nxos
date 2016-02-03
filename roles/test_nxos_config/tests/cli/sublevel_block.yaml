@@ -1,6 +1,6 @@
 ---
 - name: setup test
-  nxos_section:
+  nxos_config:
     commands:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log
@@ -11,7 +11,7 @@
     force: yes
 
 - name: configure sub level command using block resplace
-  nxos_section:
+  nxos_config:
     commands:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log
@@ -32,7 +32,7 @@
       - "'40 permit ip 4.4.4.4/32 any log' in result.commands"
 
 - name: check sub level command using block replace
-  nxos_section:
+  nxos_config:
     commands:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log

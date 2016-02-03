@@ -1,17 +1,14 @@
 ---
-- debug: msg="START nxapi/toplevel_nonidempontent"
-
 - name: setup test
-  nxos_section:
+  nxos_config:
     commands: ['hostname {{ inventory_hostname }}']
-    provider: "{{ nxapi }}"
+    provider: "{{ cli }}"
     force: yes
 
 - name: configure top level command
-  nxos_section:
+  nxos_config:
     commands: ['hostname foo']
-    provider: "{{ nxapi }}"
-    match: strict
+    provider: "{{ cli }}"
   register: result
 
 - assert:
@@ -20,14 +17,12 @@
       - "'hostname foo' in result.commands"
 
 - name: configure top level command idempotent check
-  nxos_section:
+  nxos_config:
     commands: ['hostname foo']
-    provider: "{{ nxapi }}"
-    match: strict
+    provider: "{{ cli }}"
   register: result
 
 - assert:
     that:
-      - "result.changed == true"
+      - "result.changed == false"
 
-- debug: msg="END nxapi/toplevel_nonidempontent"
