@@ -1,43 +1,37 @@
 ---
-- debug: msg="START NXAPI/DEFAULTS.YAML"
+- debug: msg="START NXAPI/BASIC.YAML"
 
 - name: setup
-  nxos_section:
+  nxos_config:
     commands:
       - no description
-      - shutdown
+      - no shutdown
     parents:
       - interface Ethernet2/5
     force: yes
     provider: "{{ nxapi }}"
 
-- name: configure device with defaults included
-  nxos_config:
-    src: defaults/config.j2
-    include_defaults: yes
+- name: configure device with config
+  nxos_template:
+    src: basic/config.j2
     provider: "{{ nxapi }}"
   register: result
-
-- debug: var=result
 
 - assert:
     that:
       - "result.changed == true"
       - "result.commands is defined"
 
-- name: check device with defaults included
-  nxos_config:
-    src: defaults/config.j2
-    include_defaults: yes
+- name: check device with config
+  nxos_template:
+    src: basic/config.j2
     provider: "{{ nxapi }}"
   register: result
-
-- debug: var=result
 
 - assert:
     that:
       - "result.changed == false"
       - "result.commands is defined"
 
-- debug: msg="END NXAPI/DEFAULTS.YAML"
+- debug: msg="END NXAPI/BASIC.YAML"
 

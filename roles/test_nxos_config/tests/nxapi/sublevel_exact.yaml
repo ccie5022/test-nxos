@@ -1,6 +1,8 @@
 ---
+- debug: msg="START nxapi/sublevel_exact.yaml"
+
 - name: setup test
-  nxos_section:
+  nxos_config:
     commands:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log
@@ -9,11 +11,11 @@
       - 50 permit ip 5.5.5.5/32 any log
     parents: ['ip access-list test']
     before: ['no ip access-list test']
-    provider: "{{ cli }}"
+    provider: "{{ nxapi }}"
     force: yes
 
 - name: configure sub level command using exact match
-  nxos_section:
+  nxos_config:
     commands:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log
@@ -21,7 +23,7 @@
       - 40 permit ip 4.4.4.4/32 any log
     parents: ['ip access-list test']
     match: exact
-    provider: "{{ cli }}"
+    provider: "{{ nxapi }}"
   register: result
 
 - assert:
@@ -35,7 +37,7 @@
       - "'50 permit ip 5.5.5.5/32 any log' not in result.commands"
 
 - name: check sub level command using exact match
-  nxos_section:
+  nxos_config:
     commands:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log
@@ -44,10 +46,11 @@
       - 50 permit ip 5.5.5.5/32 any log
     parents: ['ip access-list test']
     match: exact
-    provider: "{{ cli }}"
+    provider: "{{ nxapi }}"
   register: result
 
 - assert:
     that:
       - "result.changed == false"
 
+- debug: msg="END nxapi/sublevel_exact.yaml"

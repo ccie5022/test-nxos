@@ -2,7 +2,7 @@
 - debug: msg="START CLI/FORCE.YAML"
 
 - name: setup
-  nxos_section:
+  nxos_config:
     commands:
       - no description
       - no shutdown
@@ -12,7 +12,7 @@
     provider: "{{ cli }}"
 
 - name: configure device with config
-  nxos_config:
+  nxos_template:
     src: basic/config.j2
     provider: "{{ cli }}"
     force: yes
@@ -24,7 +24,7 @@
       - "result.commands is defined"
 
 - name: check device with config
-  nxos_config:
+  nxos_template:
     src: basic/config.j2
     provider: "{{ cli }}"
     force: yes

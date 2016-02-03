@@ -1,15 +1,15 @@
 ---
-- debug: msg="START NXAPI/BACKUP.YAML"
+- debug: msg="START CLI/BACKUP.YAML"
 
 - name: setup
-  nxos_section:
+  nxos_config:
     commands:
       - no description
       - no shutdown
     parents:
       - interface Ethernet2/5
     force: yes
-    provider: "{{ nxapi }}"
+    provider: "{{ cli }}"
 
 - name: collect any backup files
   find:
@@ -25,10 +25,10 @@
   with_items: backup_files.files
 
 - name: configure device with config
-  nxos_config:
+  nxos_template:
     src: basic/config.j2
     backup: yes
-    provider: "{{ nxapi }}"
+    provider: "{{ cli }}"
   register: result
 
 - assert:
@@ -47,5 +47,5 @@
     that:
       - "backup_files.files is defined"
 
-- debug: msg="END NXAPI/BACKUP.YAML"
+- debug: msg="END CLI/BACKUP.YAML"
 
