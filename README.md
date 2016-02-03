@@ -1,3 +1,5 @@
+[![Build Status](http://jenkins.testing.ansible.com/buildStatus/icon?job=Test_NXOS_Modules)](http://jenkins.testing.ansible.com/view/Ansible/job/Test_NXOS_Modules/)
+
 # test-nxos
 
 Playbooks for testing Ansible modules with Cisco NXOS devices
