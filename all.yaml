@@ -14,5 +14,5 @@
 
     - { role: test_nxos_command, delegate_to: virl, when: "limitto == '' or limitto == 'command'" }
     # - { role: test_nxos_section, delegate_to: virl, when: "limitto == '' or limitto == 'section'" }
-    - { role: test_nxos_config, delegate_to: virl, when: "limitto == '' or limitto == 'config'" }
-    - { role: test_nxos_nxapi, delegate_to: virl, when: "limitto == '' or limitto == 'nxapi'" }
+    # - { role: test_nxos_config, delegate_to: virl, when: "limitto == '' or limitto == 'config'" }
+    # - { role: test_nxos_nxapi, delegate_to: virl, when: "limitto == '' or limitto == 'nxapi'" }
