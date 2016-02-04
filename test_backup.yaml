@@ -38,7 +38,7 @@
     
     - name: configure device and create backup 
       nxos_template:
-        src: basic/config.j2
+        src: roles/test_nxos_template/templates/basic/config.j2
         backup: yes
         provider: "{{ cli }}"
       register: result
