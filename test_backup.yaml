@@ -29,7 +29,7 @@
       register: backup_files
       delegate_to: localhost
     
-    - name: delete backup files from PWD
+    - name: delete backup files from playbook dir
       file:
         path: "{{ item.path }}"
         state: absent
