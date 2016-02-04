@@ -3,13 +3,13 @@
 
 - name: setup test
   nxos_config:
-    commands: ['no ip access-list test']
+    lines: ['no ip access-list test']
     provider: "{{ nxapi }}"
     force: yes
 
 - name: configure sub level command
   nxos_config:
-    commands: ['10 permit ip any any log']
+    lines: ['10 permit ip any any log']
     parents: ['ip access-list test']
     provider: "{{ nxapi }}"
   register: result
@@ -17,12 +17,12 @@
 - assert:
     that:
       - "result.changed == true"
-      - "'ip access-list test' in result.commands"
-      - "'10 permit ip any any log' in result.commands"
+      - "'ip access-list test' in result.lines"
+      - "'10 permit ip any any log' in result.lines"
 
 - name: configure sub level command idempotent check
   nxos_config:
-    commands: ['10 permit ip any any log']
+    lines: ['10 permit ip any any log']
     parents: ['ip access-list test']
     provider: "{{ nxapi }}"
   register: result

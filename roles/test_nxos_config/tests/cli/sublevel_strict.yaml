@@ -14,7 +14,7 @@
 
 - name: configure sub level command using strict match
   nxos_config:
-    commands:
+    lines:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log
       - 30 permit ip 3.3.3.3/32 any log
@@ -27,16 +27,16 @@
 - assert:
     that:
       - "result.changed == true"
-      - "'ip access-list test' in result.commands"
-      - "'10 permit ip 1.1.1.1/32 any log' in result.commands"
-      - "'20 permit ip 2.2.2.2/32 any log' in result.commands"
-      - "'30 permit ip 3.3.3.3/32 any log' in result.commands"
-      - "'40 permit ip 4.4.4.4/32 any log' in result.commands"
-      - "'50 permit ip 5.5.5.5/32 any log' not in result.commands"
+      - "'ip access-list test' in result.lines"
+      - "'10 permit ip 1.1.1.1/32 any log' in result.lines"
+      - "'20 permit ip 2.2.2.2/32 any log' in result.lines"
+      - "'30 permit ip 3.3.3.3/32 any log' in result.lines"
+      - "'40 permit ip 4.4.4.4/32 any log' in result.lines"
+      - "'50 permit ip 5.5.5.5/32 any log' not in result.lines"
 
 - name: check sub level command using strict match
   nxos_config:
-    commands:
+    lines:
       - 10 permit ip 1.1.1.1/32 any log
       - 20 permit ip 2.2.2.2/32 any log
       - 30 permit ip 3.3.3.3/32 any log

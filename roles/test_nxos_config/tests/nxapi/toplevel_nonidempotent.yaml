@@ -3,13 +3,13 @@
 
 - name: setup test
   nxos_config:
-    commands: ['hostname {{ inventory_hostname }}']
+    lines: ['hostname {{ inventory_hostname }}']
     provider: "{{ nxapi }}"
     force: yes
 
 - name: configure top level command
   nxos_config:
-    commands: ['hostname foo']
+    lines: ['hostname foo']
     provider: "{{ nxapi }}"
     match: strict
   register: result
@@ -17,11 +17,11 @@
 - assert:
     that:
       - "result.changed == true"
-      - "'hostname foo' in result.commands"
+      - "'hostname foo' in result.lines"
 
 - name: configure top level command idempotent check
   nxos_config:
-    commands: ['hostname foo']
+    lines: ['hostname foo']
     provider: "{{ nxapi }}"
     match: strict
   register: result
