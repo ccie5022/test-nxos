@@ -1,4 +1,6 @@
 ---
+- debug: msg="START CLI/BADTRANSPORT.YAML"
+
 - name: Sending transport other than cli should fail 
   nxos_nxapi:
       enable_http: no
@@ -13,3 +15,5 @@
 
 - assert:
      that: result.failed and result.msg | search('transport')
+
+- debug: msg="END CLI/BADTRANSPORT.YAML"
