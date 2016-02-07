@@ -1,0 +1,15 @@
+---
+- name: Sending transport other than cli should fail 
+  nxos_nxapi:
+      enable_http: no
+      enable_sandbox: no
+      https_port: 9443
+      provider: "{{ nxapi }}" 
+  register: result
+  ignore_errors: yes
+
+- debug: var=result
+  when: debug
+
+- assert:
+     that: result.failed and result.msg | search('transport')
