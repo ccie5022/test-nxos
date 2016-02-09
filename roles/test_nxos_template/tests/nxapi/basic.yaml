@@ -20,7 +20,7 @@
 - assert:
     that:
       - "result.changed == true"
-      - "result.commands is defined"
+      - "result.updates is defined"
 
 - name: check device with config
   nxos_template:
@@ -31,7 +31,7 @@
 - assert:
     that:
       - "result.changed == false"
-      - "result.commands is defined"
+      - "result.updates is defined"
 
 - debug: msg="END NXAPI/BASIC.YAML"
 
